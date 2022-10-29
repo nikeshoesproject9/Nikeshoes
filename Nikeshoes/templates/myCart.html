@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+
+{% if cartData %}
+<div class="container">
+
+	{% for data in cartData %}
+	<div class="row">
+		<div class="col-3 col-sm-3">
+			<img class="img-thumbnail " src="{{ data.shoe_selected.image.url }}" />
+		</div>
+		<div class="col-3 col-sm-3">
+			<p>Name: <b>{{ data.shoe_selected.name }}</b></p>
+			<p>Quantity Purchased: <b>{{ data.purchased_quantity }} pair/s</b></p>
+			<p>Size: <b>{{ data.size_selected_id.size }}</b></p>
+			<p>Color: <b>{{ data.color_selected_id.color }}</b></p>
+			<p>Total Amount: <b>Php. {{ data.total_amount|floatformat:2 }}</b></p>
+			<p>Date: <b>{{ data.date }}</b></p>
+		</div>
+	</div>
+	<hr>
+	{% endfor %}
+</div>
+{% else %}
+<h5 class="text-danger"><i>You currently have an empty Cart</i></h5>
+{% endif %}
+
+
+
+{% endblock content %} 

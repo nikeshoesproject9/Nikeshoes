@@ -1,0 +1,54 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% for message in messages %}
+  {% if messages %}
+  <script>alert("{{ message }}");</script>
+  {% endif %}   
+{% endfor %}
+  <form action="">{% csrf_token %}
+    
+    <div class="input-group mb-3"  style="width: 40% !important;">
+      <span class="input-group-text" id="inputGroup-sizing-default">Search for Shoes:</span>
+      <input type="text" class="form-control"  name="searchTerm" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      <button style="margin-left: 5px;" type="submit" class="btn btn-dark">
+      Search
+    </button>
+    </div>
+    
+  </form>
+  {% if searchValue %}
+    <p>Searching for: <b>{{ searchValue }}</b></p>
+  {% endif %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% if data %}
+    {% for datas in data %}
+    
+    <div v-for="movie in movies" class="col">
+      <div class="">
+        <a href="{% url 'item_details' datas.id %}">
+        <img class="card-img-top" src="{{ datas.image.url }}" height="400px" />
+        </a>
+        <div class="card-body ">
+          <a href="{% url 'item_details' datas.id %}" class="link-dark">
+            <h5 class="card-title fw-bold">{{ datas.name }}</h5>
+          </a>
+          <p class="card-text">₱.{{ datas.price|floatformat:2 }}</p>
+          
+        </div>
+      </div>
+    </div>
+    
+    {% endfor %}
+    {% else %}
+    <h5 class="text-danger">No shoes available</h5>
+    {% endif %}
+  </div>
+
+
+  {% for i in users %}
+  <p>{{ i.username }}</p>
+
+  <p>{{ i.password }}</p>
+  {% endfor %}
+
+{% endblock content %} 
